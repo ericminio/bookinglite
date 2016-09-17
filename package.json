@@ -1,17 +1,20 @@
 {
-  "name": "node-example",
+  "name": "calendar",
   "version": "0.0.1",
+  "main": "app/servlet/web.js",
   "dependencies": {
     
   },
   "devDependencies": {
-    
+    "cheerio": "0.22.0",
+    "pg": "6.1.0"
   },
   "engines": {
     "node": "0.10.x",
     "npm": "1.3.6"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node app/servlet/web.js",
+    "test": "mocha --recursive"
   }
 }

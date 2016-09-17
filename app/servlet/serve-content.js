@@ -31,7 +31,7 @@ servecontent = function(folder) {
             response.writeHead(200, { 'Content-Type' : contentType });
 			response.write(fs.readFileSync(candidate));			
 		} else {
-			response.writeHead(404);
+			response.writeHead(406);
 		}
 		response.end();
 	};
