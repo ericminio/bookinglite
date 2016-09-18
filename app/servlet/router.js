@@ -16,7 +16,7 @@ module.exports = {
 			}
 		}
 		if (request.url == '/') {
-			return require('../calendar/calendar');
+			return require('../homepage');
 		}
 		return servecontent('app');
 	}
