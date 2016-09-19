@@ -1,0 +1,8 @@
+table.calendar{
+  width: 100%;
+}
+
+.day td{
+  width:3.225%; /*temporary - should be calculated dynamically*/
+  text-align:center;
+}
