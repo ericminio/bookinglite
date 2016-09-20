@@ -1,6 +1,9 @@
 var dateUtils = require('../app/lib/date.utils');
 var expect = require('expect');
-var date = new Date('September 19, 2016 11:00:00');
+
+//September (month=8) 19th 2016 (It's a Monday)
+var date = new Date(2016,8,19,0,0,0,0);
+
 describe('DateUtils', function(){
   
   it('returns expected Short Week Day', function(){
@@ -14,4 +17,8 @@ describe('DateUtils', function(){
   it('returns expected Month', function(){
     expect(dateUtils.getMonth(date)).toBe('Septembre');
   }); 
+  
+  it('returns expected DaysInMonth', function(){
+    expect(dateUtils.daysInMonth(date)).toBe(30);
+  });
 });

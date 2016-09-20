@@ -6,3 +6,7 @@ table.calendar{
   width:3.225%; /*temporary - should be calculated dynamically*/
   text-align:center;
 }
+
+.dayname td{
+  text-align:center;
+}

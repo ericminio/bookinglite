@@ -1,15 +1,38 @@
 var fs        = require('fs');
 var cheerio		= require('cheerio');
+var dateUtils = require('../lib/date.utils');
 
-calendar = function(request, response, database) {
-  var html = fs.readFileSync('./app/calendar/calendar.html').toString();
-  var $ = cheerio.load(html);
-	
-  $("title").html("Ceci est un nouveau test");
-	
-  response.write($.html());
-	response.end();
+function Calendar(date) {
+  this.date = date;
+}
+
+Calendar.prototype.fillCalendar = function(page, currentDate) {
+  var calendarSection = page("#calendar");
+  calendarSection.empty();
+  
+  calendarSection.append('<table>');
+  this.fillMonth(calendarSection);
+  
+  calendarSection.append('</table>');
   
 };
 
-module.exports = calendar;
+Calendar.prototype.fillMonth = function(calendarSection){
+  var daysInMonth = dateUtils.daysInMonth(this.date);
+  calendarSection.append('<tr class=month> <td colspan'+daysInMonth+'>'+dateUtils.getMonth(this.date)+'</td> </tr>');
+};
+
+Calendar.prototype.fillDay = function(calendarSection){
+  var daysInMonth = dateUtils.daysInMonth(this.date);
+  
+  calendarSection.append('<tr class=day>');
+  for(i=0;i<daysInMonth;i++){
+    var currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), i,0,0,0,0);
+    calendarSection.append('<td class=weekday'+currentDate.getDay()+'>'+i+'</td>');
+  }
+  calendarSection.append('</tr>');
+};
+
+
+
+module.exports = Calendar;
