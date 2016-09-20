@@ -2,16 +2,14 @@
   "name": "calendar",
   "version": "0.0.1",
   "main": "app/servlet/web.js",
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "cheerio": "0.22.0",
     "pg": "6.1.0",
     "zombie": "2.0.0-alpha11",
     "jquery": "3.1.0",
-    "expect": "1.20.2"
-    
+    "expect": "1.20.2",
+    "mocha": "~3.0.2"
   },
   "engines": {
     "node": "0.10.x",
