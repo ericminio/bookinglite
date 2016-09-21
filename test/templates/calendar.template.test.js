@@ -24,8 +24,14 @@ describe('Calendar template', function(){
   
   it('display month cell', function(){
     var calendar = new Calendar(date);
-    calendar.fillCalendar($);
-    expect($('.month td').text()).toBe('Septembre');
+    var row = calendar.buildMonthRow();
+    expect(row.text()).toBe(' Septembre ');
+  });
+  
+  it('display day cell', function(){
+    var calendar = new Calendar(date);
+    var row = calendar.buildDayRow();
+    expect(row.text()).toBe(' 123456789101112131415161718192021222324252627282930');
   });
   
 //   it('display day cells', function(){
