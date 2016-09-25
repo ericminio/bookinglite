@@ -1,15 +1,15 @@
-const week_day_short_fr = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-const week_day_long_fr = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const week_day_short_fr = ['D','L', 'M', 'M', 'J', 'V', 'S'];
+const week_day_long_fr = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ];
 const month_fr = ['Janvier', 'Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 
 module.exports={
   getShortWeekDay : function(date){
     var dayOfWeek = date.getDay();
-    return week_day_short_fr[dayOfWeek-1];
+    return week_day_short_fr[dayOfWeek];
   },
   getLongWeekDay : function(date){
     var dayOfWeek = date.getDay();
-    return week_day_long_fr[dayOfWeek-1];
+    return week_day_long_fr[dayOfWeek];
   },
   getMonth : function(date){
     var monthValue = date.getMonth();
