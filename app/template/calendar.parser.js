@@ -6,7 +6,7 @@ function Calendar(date, database) {
   this.date = date;
   this.database = database;
   this.daysInMonth = dateUtils.daysInMonth(this.date);
-  this.mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
+  
 }
 
 Calendar.prototype.fillCalendar = function(page) {
@@ -15,7 +15,7 @@ Calendar.prototype.fillCalendar = function(page) {
   
   table.append(this.buildMonthRow().html());
   table.append(this.buildDayWeekRow());
-  table.append(this.buildDayRow());
+  table.append(this.buildDayRow().html());
   table.append(this.buildElementRow(1));
     table.append(this.buildElementRow(1));
     table.append(this.buildElementRow(1));
@@ -28,26 +28,36 @@ Calendar.prototype.fillCalendar = function(page) {
 };
 
 Calendar.prototype.buildMonthRow = function(){
-  var monthTemplate = cheerio.load(this.mainTemplate.html('.month:first-child'));
+  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
+  var monthTemplate = cheerio.load(mainTemplate.html('.month:first-child'));
   
   monthTemplate('td:nth-child(2)').attr('colspan', this.daysInMonth);
   monthTemplate('.month-title').text(dateUtils.getMonth(this.date) + ' ' + this.date.getFullYear());
   
   return monthTemplate;
-  //return cheerio.load('<tr class=month><td class="element-title"></td> <td  colspan='+this.daysInMonth+'>'+dateUtils.getMonth(this.date)+'</td> </tr>');
 };
 
-Calendar.prototype.buildDayRow = function(calendarSection){
-  var newTr = cheerio('<tr class=day> </tr>');
-  newTr.append(cheerio('<td class="element-title">Chalets</td>'));
+Calendar.prototype.buildDayRow = function(){
+  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
+  var dayTemplate = cheerio.load(mainTemplate.html('.day'));
+ 
+  var cellElemenTitle = dayTemplate.html('td:first-child'); 
+  var cellTemplate = dayTemplate.html('td:nth-child(2)');
+  
+  dayTemplate('tr').empty();
+  dayTemplate('tr').append(cellElemenTitle);
+ 
   for(i=0;i<this.daysInMonth;i++){
+    var currentCell = cheerio(cellTemplate);
     var currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), i+1,0,0,0,0);
     
-    var newTd = cheerio('<td class=weekday'+currentDate.getDay()+'>'+(i+1)+'</td>');
-    newTr.append(newTd);
+    currentCell.attr('class', 'weekday' + currentDate.getDay());
+    currentCell.text(i+1);
+    
+    dayTemplate('tr').append(currentCell);
   }
 
-  return newTr;
+  return dayTemplate;
 };
 
 Calendar.prototype.buildDayWeekRow = function(calendarSection){

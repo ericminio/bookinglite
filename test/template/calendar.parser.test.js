@@ -40,16 +40,14 @@ describe('Calendar template', function(){
     var calendar = new Calendar(date, this.database);
     var row = calendar.buildMonthRow();
     
-    console.log(row.html());
-    
     expect(row('td', 'tr').next().attr('colspan')).to.equal('30');
-    //expect(row('td', 'tr').next().text()).to.equal('Septembre');
+    expect(row('td', 'tr').next().text()).to.equal('Septembre 2016');
   });
   
   it('display day cell', function(){
     var calendar = new Calendar(date);
     var row = calendar.buildDayRow();
-    expect(row.text()).to.equal(' Chalets123456789101112131415161718192021222324252627282930');
+    expect(row.text()).to.equal('Chalets123456789101112131415161718192021222324252627282930');
   });
   
   it('display dayweek cell', function(){
