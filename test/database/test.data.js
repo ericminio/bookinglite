@@ -5,6 +5,7 @@ module.exports = {
     ],
     elements: [
         {"element_id" : 1, "name": "Chalet 1"}
+        ,{"element_id" : 2, "name": "Chalet 2"}
     ]
     
 }

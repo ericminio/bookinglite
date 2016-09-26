@@ -1,8 +1,16 @@
 var events = new Map();
 var elements = new Map();
 
-function Database() {
+function Database(data) {
+  for(i=0; i<data.events.length; i++){
+    this.createEvent(data.events[i]);
+  }
+
+  for(i=0; i<data.elements.length; i++){
+    this.createElement(data.elements[i]);
+  }
 }
+
 Database.prototype.events = events;
 Database.prototype.createEvent = function(event){
     events.set(event.event_id, event);
@@ -30,6 +38,20 @@ Database.prototype.findElementByID = function(element_id){
     }
   });
   return toReturn;
+}
+
+Database.prototype.getAllElements = function(){
+  var iterator = elements.values();
+  var list = [];
+  while(true){
+    var value = iterator.next().value;
+    if(!value){
+      break;
+    }
+    list.push(value);
+    
+  }
+  return list;
 }
 
 module.exports = Database;

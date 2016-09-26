@@ -5,17 +5,7 @@ var assert = require('assert');
 describe('Memory database', function(){
   
   before(function(){
-    this.database = new Database();
-    
-    for(i=0; i<data.events.length; i++){
-      this.database.createEvent(data.events[i]);
-    }
-    
-    for(i=0; i<data.elements.length; i++){
-
-      this.database.createElement(data.elements[i]);
-    }
-    
+    this.database = new Database(data);
   });
   
   it('can read first event from element_id and date', function(){
@@ -40,6 +30,13 @@ describe('Memory database', function(){
     var element = this.database.findElementByID(1);
     expect(element).to.not.equal(undefined);
     assert.equal(element.name, "Chalet 1");
+    
+  });
+  
+  it('can return all elements', function(){
+    var elements = this.database.getAllElements();
+    expect(elements).to.not.equal(undefined);
+    assert.equal(elements.length, 2);
     
   });
   

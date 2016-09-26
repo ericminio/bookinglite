@@ -2,8 +2,9 @@ var fs        = require('fs');
 var cheerio		= require('cheerio');
 var dateUtils = require('../lib/date.utils');
 
-function Calendar(date) {
+function Calendar(date, database) {
   this.date = date;
+  this.database = database;
   this.daysInMonth = dateUtils.daysInMonth(this.date);
 }
 
@@ -14,6 +15,11 @@ Calendar.prototype.fillCalendar = function(page) {
   table.append(this.buildMonthRow().html());
   table.append(this.buildDayWeekRow());
   table.append(this.buildDayRow());
+  table.append(this.buildElementRow(1));
+    table.append(this.buildElementRow(1));
+    table.append(this.buildElementRow(1));
+    table.append(this.buildElementRow(1));
+    table.append(this.buildElementRow(1));
   
   page("#calendar").empty().append(table);
 
@@ -51,9 +57,21 @@ Calendar.prototype.buildDayWeekRow = function(calendarSection){
   return newTr;
 };
 
-Calendar.prototype.buildElementRow = function(){
+Calendar.prototype.buildElementRow = function(element_id){
+  var newTr = cheerio('<tr class=eventrow> </tr>');
   
-  var newTr = cheerio('<tr class=dayweek> </tr>');
+  var element = this.database.findElementByID(element_id);
+  
+  newTr.append(cheerio('<td>'+element.name+'</td>'));
+  
+  for(i=0;i<this.daysInMonth;i++){
+    var currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), i+1,0,0,0,0);
+    var newTd = cheerio('<td data-day='+ (i+1) +' class=weekday'+currentDate.getDay()+'></td>');
+    
+    newTr.append(newTd);
+  }
+  
+  return newTr;
 };
 
 

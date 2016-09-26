@@ -7,7 +7,7 @@ calendar = function(request, response, database) {
   var $ = cheerio.load(html);
 	
 	var tempDate = new Date(2016, 8, 19, 0,0,0,0);
-	var calendar = new Calendar(tempDate);
+	var calendar = new Calendar(tempDate, database);
 	
 	calendar.fillCalendar($);
 	
