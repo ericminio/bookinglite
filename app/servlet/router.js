@@ -5,7 +5,7 @@ module.exports = {
     routes: [
         {
  						pattern: /^\/calendar[\/]?$/,
-            target: require('./routes/calendar')
+            target: require('./routes/route.calendar')
         }
     ],
     
@@ -16,7 +16,7 @@ module.exports = {
 			}
 		}
 		if (request.url == '/') {
-			return require('./routes/calendar');
+			return require('./routes/route.calendar');
 		}
 		return servecontent('app');
 	}
