@@ -30,6 +30,18 @@ Database.prototype.findEventByElementAndDate = function(element_id, date){
   return toReturn;
 }
 
+Database.prototype.findEventsByElementYearMonth = function(element_id, year, month){
+  var list = [];
+  
+  events.forEach(function(value, key, map){
+    if(value.element_id == element_id && value.start_date.getFullYear() == year && value.start_date.getMonth() == month){
+      list.push(value);
+    }
+  });
+  return list;
+}
+
+
 Database.prototype.findElementByID = function(element_id){
   var toReturn;
   elements.forEach(function(value, key, map){

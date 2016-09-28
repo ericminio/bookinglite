@@ -17,6 +17,13 @@ describe('Memory database', function(){
     
   });
   
+  it('can read all events from element_id, year and month', function(){
+    var events = this.database.findEventsByElementYearMonth(1, 2016, 8);
+    expect(events).to.not.equal(undefined);
+    assert.equal(events.length, 2);
+    
+  });
+  
   it('can read second event from element_id and date', function(){
     var date = new Date(2016,8,25,0,0,0,0);
     
@@ -37,6 +44,8 @@ describe('Memory database', function(){
     var elements = this.database.getAllElements();
     expect(elements).to.not.equal(undefined);
     assert.equal(elements.length, 2);
+    assert.equal(elements[0].element_id, 1);
+    assert.equal(elements[1].element_id, 2);    
     
   });
   

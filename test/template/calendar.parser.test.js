@@ -53,7 +53,7 @@ describe('Calendar template', function(){
   it('display dayweek cell', function(){
     var calendar = new Calendar(date);
     var row = calendar.buildDayWeekRow();
-    expect(row.text()).to.equal(' JVSDLMMJVSDLMMJVSDLMMJVSDLMMJV');
+    expect(row.text()).to.equal('JVSDLMMJVSDLMMJVSDLMMJVSDLMMJV');
   });
 
   it('dayplay chalet 1 with 2 events', function(){   
@@ -61,8 +61,11 @@ describe('Calendar template', function(){
     var row = calendar.buildElementRow(1);
     
     expect(row).to.exist;
+    
     expect(row.html()).to.contain("Chalet 1");
-    //expect(row.html()).to.contain("Bob Dilan");
+    
+    expect(row.text()).to.contain('Mathieu')
+    
   });
   
 });

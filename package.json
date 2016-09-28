@@ -2,7 +2,9 @@
   "name": "calendar",
   "version": "0.0.1",
   "main": "app/servlet/web.js",
-  "dependencies": {},
+  "dependencies": {
+    "selenium-webdriver": "^2.53.3"
+  },
   "devDependencies": {
     "cheerio": "0.22.0",
     "pg": "6.1.0",
