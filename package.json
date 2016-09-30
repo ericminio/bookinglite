@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "main": "app/servlet/web.js",
   "dependencies": {
+    "chai-as-promised": "^6.0.0",
+    "chromedriver": "^2.12.0",
+    "jasmine-node": "^1.14.5",
     "selenium-webdriver": "^2.53.3"
   },
   "devDependencies": {
@@ -20,6 +23,7 @@
   },
   "scripts": {
     "start": "node app/servlet/web.js",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "webtest" : "mocha web-test --recursive"
   }
 }

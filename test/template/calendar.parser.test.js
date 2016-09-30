@@ -62,8 +62,10 @@ describe('Calendar template', function(){
     
     expect(row).to.exist;
     
-    expect(row.html()).to.contain("Chalet 1");
+    var event_element = $(row).find('div[id=event-1]').first();
+    expect(event_element.html()).to.contain("Mathieu");
     
+    expect(row.html()).to.contain("Chalet 1");
     expect(row.text()).to.contain('Mathieu')
     
   });

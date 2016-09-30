@@ -119,6 +119,8 @@ Calendar.prototype.buildElementRow = function(element_id) {
     var current_event_element = template_event_element.clone();
     var current_eventtext_element = template_eventtext_element.clone();    
 
+    current_event_element.attr("id", "event-" + event.event_id);
+    
     current_eventtext_element.text(event.first_name);
     current_event_element.empty().append(current_eventtext_element);
 
