@@ -4,6 +4,8 @@
   "main": "app/servlet/web.js",
   "dependencies": {
     "chai-as-promised": "^6.0.0",
+    "chai-webdriver": "^1.2.0",
+    "chai-webdriver-promised": "^4.0.3",
     "chromedriver": "^2.12.0",
     "jasmine-node": "^1.14.5",
     "selenium-webdriver": "^2.53.3"
@@ -24,6 +26,6 @@
   "scripts": {
     "start": "node app/servlet/web.js",
     "test": "mocha --recursive",
-    "webtest" : "./check.sh"
+    "webtest": "./check.sh"
   }
 }

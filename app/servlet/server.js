@@ -1,5 +1,5 @@
 
-function Server(router, database) {
+function Server(router) {
 	this.router = router;
 }
 

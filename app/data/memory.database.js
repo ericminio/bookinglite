@@ -2,39 +2,45 @@ var events = new Map();
 var elements = new Map();
 
 function Database(data) {
-  for(i=0; i<data.events.length; i++){
+  for (i = 0; i < data.events.length; i++) {
     this.createEvent(data.events[i]);
   }
 
-  for(i=0; i<data.elements.length; i++){
+  for (i = 0; i < data.elements.length; i++) {
     this.createElement(data.elements[i]);
   }
 }
 
 Database.prototype.events = events;
-Database.prototype.createEvent = function(event){
-    events.set(event.event_id, event);
+Database.prototype.createEvent = function(event) {
+  events.set(event.event_id, event);
 }
 
-Database.prototype.createElement = function(element){
-    elements.set(element.element_id, element);
+Database.prototype.createElement = function(element) {
+  elements.set(element.element_id, element);
 }
 
-Database.prototype.findEventByElementAndDate = function(element_id, date){
+Database.prototype.findEventByElementAndDate = function(element_id, date) {
   var toReturn;
-  events.forEach(function(value, key, map){
-    if(value.element_id == element_id && value.start_date.getTime() == date.getTime()){
+  events.forEach(function(value, key, map) {
+    if (value.element_id == element_id && value.start_date.getTime() == date.getTime()) {
       toReturn = value;
     }
   });
   return toReturn;
 }
 
-Database.prototype.findEventsByElementYearMonth = function(element_id, year, month){
+Database.prototype.findEventsByElementYearMonth = function(element_id, year, month) {
   var list = [];
-  
-  events.forEach(function(value, key, map){
-    if(value.element_id == element_id && value.start_date.getFullYear() == year && value.start_date.getMonth() == month){
+
+  events.forEach(function(value, key, map) {
+    var start_date = value.start_date;
+    var end_date = new Date();
+    end_date.setDate(start_date + value.duration_days);
+
+    if (value.element_id == element_id &&
+      (start_date.getFullYear() == year || end_date.getFullYear() == year) &&
+      (start_date.getMonth() == month || end_date.getMonth() == month)) {
       list.push(value);
     }
   });
@@ -42,26 +48,26 @@ Database.prototype.findEventsByElementYearMonth = function(element_id, year, mon
 }
 
 
-Database.prototype.findElementByID = function(element_id){
+Database.prototype.findElementByID = function(element_id) {
   var toReturn;
-  elements.forEach(function(value, key, map){
-    if(value.element_id == element_id){
+  elements.forEach(function(value, key, map) {
+    if (value.element_id == element_id) {
       toReturn = value;
     }
   });
   return toReturn;
 }
 
-Database.prototype.getAllElements = function(){
+Database.prototype.getAllElements = function() {
   var iterator = elements.values();
   var list = [];
-  while(true){
+  while (true) {
     var value = iterator.next().value;
-    if(!value){
+    if (!value) {
       break;
     }
     list.push(value);
-    
+
   }
   return list;
 }
