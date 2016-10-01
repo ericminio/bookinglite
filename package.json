@@ -24,6 +24,6 @@
   "scripts": {
     "start": "node app/servlet/web.js",
     "test": "mocha --recursive",
-    "webtest" : "mocha web-test --recursive"
+    "webtest" : "./check.sh"
   }
 }

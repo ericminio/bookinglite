@@ -37,7 +37,15 @@ describe('Calendar grid', function() {
   });
 
   it('has a div of class event with id event-1', function() {
-    this.driver.findElement(By.className('event'));
+    Object.prototype.getName = function() {
+      var funcNameRegex = /function (.{1,})\(/;
+      var results = (funcNameRegex).exec((this).constructor.toString());
+      return (results && results.length > 1) ? results[1] : "";
+    };
+
+    this.driver.findElement(By.id('event-1')).then(function(el) {
+      console.log(el.getName());
+    });
   });
 
 });

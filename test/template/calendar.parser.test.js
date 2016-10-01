@@ -64,6 +64,7 @@ describe('Calendar template', function(){
     
     var event_element = $(row).find('div[id=event-1]').first();
     expect(event_element.html()).to.contain("Mathieu");
+    expect(event_element.attr('days')).to.equal('4');
     
     expect(row.html()).to.contain("Chalet 1");
     expect(row.text()).to.contain('Mathieu')

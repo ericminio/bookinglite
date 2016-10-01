@@ -12,14 +12,14 @@ module.exports = {
     "first_name": "Jessika",
     "last_name": "Pepin",
     "start_date": new Date(2016, 8, 25, 0, 0, 0, 0),
-    "duration_days": 3
+    "duration_days": 7
   }, {
     "event_id": 3,
     "element_id": 2,
     "first_name": "Sebastien",
     "last_name": "Dancause",
     "start_date": new Date(2016, 8, 2, 0, 0, 0, 0),
-    "duration_days": 3
+    "duration_days": 10
   }],
   elements: [{
     "element_id": 1,
