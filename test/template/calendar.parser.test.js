@@ -56,7 +56,7 @@ describe('Calendar template', function(){
     expect(row.text()).to.equal('JVSDLMMJVSDLMMJVSDLMMJVSDLMMJV');
   });
 
-  it('dayplay chalet 1 with 2 events', function(){   
+  it('dayplay chalet 1 with event 1', function(){   
     var calendar = new Calendar(date, this.database);
     var row = calendar.buildElementRow(1);
     
@@ -65,10 +65,21 @@ describe('Calendar template', function(){
     var event_element = $(row).find('div[id=event-1]').first();
     expect(event_element.html()).to.contain("Mathieu");
     expect(event_element.attr('days')).to.equal('4');
+  });
+  
+  it('dayplay event starting in previous month', function(){   
+    var calendar = new Calendar(date, this.database);
+    var row = calendar.buildElementRow(1);
     
-    expect(row.html()).to.contain("Chalet 1");
-    expect(row.text()).to.contain('Mathieu')
+    expect(row).to.exist;
     
+    var elements = $(row).find('div[id=event-4]');
+    expect(elements).to.exist;
+    expect(elements.length).to.equal(1);
+    
+    var event_element = elements.first();
+    expect(event_element.html()).to.contain("Bob");
+    expect(event_element.attr('days')).to.equal('4');
   });
   
 });

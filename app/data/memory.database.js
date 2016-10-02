@@ -35,9 +35,10 @@ Database.prototype.findEventsByElementYearMonth = function(element_id, year, mon
 
   events.forEach(function(value, key, map) {
     var start_date = value.start_date;
-    var end_date = new Date();
-    end_date.setDate(start_date + value.duration_days);
-
+    var end_date = new Date(start_date);
+    end_date.setDate(start_date.getDate() + value.duration_days);
+  
+//     console.log(value.event_id + ' ' + value.element_id + ' -- ' + start_date + '-- for ' + value.duration_days + ' days --' + end_date);
     if (value.element_id == element_id &&
       (start_date.getFullYear() == year || end_date.getFullYear() == year) &&
       (start_date.getMonth() == month || end_date.getMonth() == month)) {

@@ -20,7 +20,7 @@ describe('Memory database', function() {
   it('can read all events from element_id, year and month', function() {
     var events = this.database.findEventsByElementYearMonth(1, 2016, 8);
     expect(events).to.not.equal(undefined);
-    assert.equal(events.length, 2);
+    assert.equal(events.length, 3);
 
   });
 
@@ -54,16 +54,17 @@ describe('Memory database', function() {
     var end_date = new Date(start_date);
     end_date.setDate(start_date.getDate() + 7);
 
-    assert.equal(end_date, new Date(2016, 8, 4, 0, 0, 0, 0));
+    assert.equal(end_date.getTime(), new Date(2016, 8, 4, 0, 0, 0, 0).getTime());
   });
 
   it('can return events stating in previous month', function() {
     var elements = this.database.findEventsByElementYearMonth(1, 2016, 8);
     expect(elements).to.not.equal(undefined);
     assert.equal(elements.length, 3);
-    assert.equal(elements[0].element_id, 1);
-    assert.equal(elements[1].element_id, 2);
-    assert.equal(elements[2].element_id, 4);
+    
+    assert.equal(elements[0].event_id, 1);
+    assert.equal(elements[1].event_id, 2);
+    assert.equal(elements[2].event_id, 4);
   });
 
 });
