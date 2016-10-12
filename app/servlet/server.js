@@ -17,7 +17,7 @@ Server.prototype.start = function() {
 };
 
 Server.prototype.stop = function() {
-	//this.server.close();
+	this.server.close();
 	console.log('Server closed');
 };
 
