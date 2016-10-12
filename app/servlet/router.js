@@ -4,7 +4,7 @@ module.exports = {
 	
     routes: [
         {
- 						pattern: /^\/calendar[\/]?$/,
+ 						pattern: /\/calendar\??(&?\w*=\w*)*?(#\w*)?$/,
             target: require('./routes/route.calendar')
         }
     ],
