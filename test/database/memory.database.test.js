@@ -40,10 +40,10 @@ describe('Memory database', function() {
 
   });
 
-  it('can return all elements', function() {
+  it('can return elements', function() {
     var elements = this.database.getAllElements();
     expect(elements).to.not.equal(undefined);
-    assert.equal(elements.length, 2);
+
     assert.equal(elements[0].element_id, 1);
     assert.equal(elements[1].element_id, 2);
 

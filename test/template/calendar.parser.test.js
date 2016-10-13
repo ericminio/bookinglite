@@ -1,85 +1,89 @@
-var cheerio   = require('cheerio');
-var fs        = require('fs');
-var assert    = require('assert');
-var expect   = require('chai').expect;
+var cheerio = require('cheerio');
+var fs = require('fs');
+var assert = require('assert');
+var expect = require('chai').expect;
 var Calendar = require('../../app/template/calendar.parser');
 var Database = require('../../app/data/memory.database');
 var data = require('../database/test.data');
 var $;
 
 //September (month=8) 19th 2016 (It's a Monday)
-var date = new Date(2016,8,19,0,0,0,0);
+var date = new Date(2016, 8, 19, 0, 0, 0, 0);
 
-describe('Calendar template', function(){
-  beforeEach(function(){   
+describe('Calendar template', function() {
+  beforeEach(function() {
     var html = '<section id=calendar><table class=calendar><table></section>';
     $ = cheerio.load(html);
   });
-  
-  before(function(){
+
+  before(function() {
     this.database = new Database(data);
-    
-    for(i=0; i<data.events.length; i++){
-      this.database.createEvent(data.events[i]);
-    }
-    
-    for(i=0; i<data.elements.length; i++){
-      this.database.createElement(data.elements[i]);
-    }
   });
-  
-  it('has element with id "calendar"', function(){
+
+  it('has element with id "calendar"', function() {
     expect($('#calendar').html()).to.exist;
   });
-  
-  it('has element with class "calendar"', function(){
+
+  it('has element with class "calendar"', function() {
     expect($('.calendar').html()).to.exist;
   });
-  
-  it('display month cell', function(){
+
+  it('display month cell', function() {
     var calendar = new Calendar(date, this.database);
     var row = calendar.buildMonthRow();
-    
+
     expect(row('td', 'tr').next().attr('colspan')).to.equal('30');
     expect(row('td', 'tr').next().text()).to.equal('Septembre 2016');
   });
-  
-  it('display day cell', function(){
+
+  it('display day cell', function() {
     var calendar = new Calendar(date);
     var row = calendar.buildDayRow();
     expect(row.text()).to.equal('Chalets123456789101112131415161718192021222324252627282930');
   });
-  
-  it('display dayweek cell', function(){
+
+  it('display dayweek cell', function() {
     var calendar = new Calendar(date);
     var row = calendar.buildDayWeekRow();
     expect(row.text()).to.equal('JVSDLMMJVSDLMMJVSDLMMJVSDLMMJV');
   });
 
-  it('dayplay chalet 1 with event 1', function(){   
+  it('dayplay chalet 1 with event 1', function() {
     var calendar = new Calendar(date, this.database);
     var row = calendar.buildElementRow(1);
-    
+
     expect(row).to.exist;
-    
+
     var event_element = $(row).find('div[id=event-1]').first();
     expect(event_element.html()).to.contain("Mathieu");
     expect(event_element.attr('days')).to.equal('4');
   });
-  
-  it('dayplay event starting in previous month', function(){   
+
+  it('dayplay event starting in previous month', function() {
     var calendar = new Calendar(date, this.database);
     var row = calendar.buildElementRow(1);
-    
+
     expect(row).to.exist;
-    
+
     var elements = $(row).find('div[id=event-4]');
     expect(elements).to.exist;
     expect(elements.length).to.equal(1);
-    
+
     var event_element = elements.first();
     expect(event_element.html()).to.contain("Bob");
     expect(event_element.attr('days')).to.equal('4');
   });
-  
+
+  it('creates the expected "Next" link', function() {
+    var calendar = new Calendar(date, this.database);
+    var link = calendar.buildLinkNext();
+    expect(link.attr('href')).to.equal('/calendar?y=2016&m=10');
+  });
+
+  it('creates the expected "Previous" link', function() {
+    var calendar = new Calendar(date, this.database);
+    var link = calendar.buildLinkPrevious();
+    expect(link.attr('href')).to.equal('/calendar?y=2016&m=8');
+  });
+
 });

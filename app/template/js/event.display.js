@@ -1,5 +1,5 @@
 function reposition() {
-  $('div[class=event]').each(function() {
+  $('div.event').each(function() {
     var div = $(this);
     var parentTd = div.closest('td');
 
@@ -12,8 +12,16 @@ function reposition() {
       totalWidth = totalWidth + currentTd.outerWidth();
       currentTd = currentTd.next();
     }
+
     div.closest('span').css("width", (totalWidth - 1) + "px");
-    div.css("left", parentTd.width() / 2);
-    div.css("width", (totalWidth - 1) + "px");
+    
+    if (div.hasClass('prev')) {
+      div.css("left", "0px");
+      div.css("width", (totalWidth + (parentTd.outerWidth()/2) - 1) + "px");
+    } else {
+      div.css("left", parentTd.outerWidth() / 2);
+      div.css("width", (totalWidth - 1) + "px");
+    }
   });
 }
+ 

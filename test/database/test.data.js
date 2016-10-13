@@ -28,6 +28,13 @@ module.exports = {
     "last_name": "Binette",
     "start_date": new Date(2016, 7, 28, 0, 0, 0, 0),
     "duration_days": 7
+  }, {
+    "event_id": 5,
+    "element_id": 4,
+    "first_name": "Fred",
+    "last_name": "Boulette",
+    "start_date": new Date(2016, 8, 28, 0, 0, 0, 0),
+    "duration_days": 7
   }],
   elements: [{
     "element_id": 1,
@@ -35,6 +42,18 @@ module.exports = {
   }, {
     "element_id": 2,
     "name": "Chalet 2"
+  },{
+    "element_id": 3,
+    "name": "Chalet 3"
+  },{
+    "element_id": 4,
+    "name": "Chalet 5"
+  },{
+    "element_id": 5,
+    "name": "Chalet 6"
+  },{
+    "element_id": 6,
+    "name": "Chalet 8"
   }]
 
 }

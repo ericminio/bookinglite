@@ -1,6 +1,7 @@
 var fs = require('fs');
 var cheerio = require('cheerio');
 var dateUtils = require('../lib/date.utils');
+var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
 
 function Calendar(date, database) {
   this.date = date;
@@ -8,9 +9,7 @@ function Calendar(date, database) {
   this.daysInMonth = dateUtils.daysInMonth(this.date);
 }
 
-Calendar.prototype.fillCalendar = function(page) {
-
-  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
+Calendar.prototype.fillCalendar = function(page) {  
   var template = cheerio.load(mainTemplate.html('.calendar'));
 
   template = cheerio(template('.calendar').empty());
@@ -24,12 +23,12 @@ Calendar.prototype.fillCalendar = function(page) {
     var element = elements[j];
     template.append(this.buildElementRow(element.element_id));
   }
-
+  template.append(this.buildLinkPrevious());
+  template.append(this.buildLinkNext());
   page("#calendar").empty().append(template);
 };
 
 Calendar.prototype.buildMonthRow = function() {
-  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
   var template = cheerio.load(mainTemplate.html('.month:first-child'));
 
   template('td:nth-child(2)').attr('colspan', this.daysInMonth);
@@ -39,7 +38,6 @@ Calendar.prototype.buildMonthRow = function() {
 };
 
 Calendar.prototype.buildDayRow = function() {
-  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
   var template = cheerio.load(mainTemplate.html('.day'));
 
   var firstCell = template.html('td:first-child');
@@ -61,7 +59,6 @@ Calendar.prototype.buildDayRow = function() {
 };
 
 Calendar.prototype.buildDayWeekRow = function(calendarSection) {
-  var mainTemplate = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
   var template = cheerio.load(mainTemplate.html('.dayweek'));
 
   var firstCell = template.html('td:first-child');
@@ -83,7 +80,7 @@ Calendar.prototype.buildDayWeekRow = function(calendarSection) {
 };
 
 Calendar.prototype.buildElementRow = function(element_id) {
-  var $ = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
+  var $ = mainTemplate;
   var event_rows_html = $.html('tr[class=eventrow]');
   var template_row_element = $(event_rows_html).first();
 
@@ -132,6 +129,7 @@ Calendar.prototype.buildElementRow = function(element_id) {
       var end_date = new Date(event.start_date);
       end_date.setDate(event.start_date.getDate() + event.duration_days);
       current_event_element.attr("days", end_date.getDate());
+      current_event_element.addClass("prev");
     }else{
       current_start_day = event.start_date.getDate();
       current_event_element.attr("days", event.duration_days);
@@ -145,6 +143,26 @@ Calendar.prototype.buildElementRow = function(element_id) {
   return template_row_element;
 };
 
+Calendar.prototype.buildLinkNext = function(){
+  var link = cheerio(mainTemplate.html('#next'));
+  
+  var nextMonth = new Date(this.date);
+  nextMonth.setMonth(this.date.getMonth() + 2);
+  
+  link.attr("href", "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth());
+  
+  return link;
+};
 
+Calendar.prototype.buildLinkPrevious = function(){
+  var link = cheerio(mainTemplate.html('#previous'));
+  
+  var nextMonth = new Date(this.date);
+  nextMonth.setMonth(this.date.getMonth());
+  
+  link.attr("href", "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth());
+  
+  return link;
+};
 
 module.exports = Calendar;

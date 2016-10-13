@@ -60,7 +60,7 @@ tr.day td {
 
 .event {
   position: absolute;
-  border-radius: 2px;
+  border-radius: 7px;
   background: #73AD21;
   height: 33px;
   margin-top: -16px;

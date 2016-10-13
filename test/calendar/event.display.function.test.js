@@ -21,8 +21,8 @@ describe('Event display', function() {
           '   <script>$(document).ready(function(){reposition();}) </script>' +
           '       <table id=calendar cellspacing=0 cellpadding=0>' +
           '       <tr>' +
+          '           <td width=30px><div class="event prev" id="event-2" days=4><span>Mathieu</span></div></td>' +
           '           <td width=30px><div class="event" id="event-1" days=6><span>Mathieu</span></div></td>' +
-          '           <td width=30px></td>' +
           '           <td width=30px></td>' +
           '           <td width=30px></td>' +
           '           <td width=30px></td>' +
@@ -72,7 +72,7 @@ describe('Event display', function() {
   });
 
 
-  it('show events width expected width', function(done) {
+  it('show events width expected width when all on same month', function(done) {
     this.timeout(10000);
     driver.manage().window().setSize(1024, 768).then(function() {
       var element = driver.findElement(By.id('event-1'));
@@ -80,6 +80,31 @@ describe('Event display', function() {
         function(value) {
           //6 days x 30px - 1px = 179px
           expect(value).to.be.equal('179px');
+          done();
+        });
+    });
+  });
+
+  it('show events width expected width when starting on previous month', function(done) {
+    this.timeout(10000);
+    driver.manage().window().setSize(1024, 768).then(function() {
+      var element = driver.findElement(By.id('event-2'));
+      element.getCssValue('width').then(
+        function(value) {
+          //4 days x 30px + 15px - 1px = 134px
+          expect(value).to.be.equal('134px');
+          done();
+        });
+    });
+  });
+  
+  it('show events at the beginning of cell when event is starting on previous month', function(done) {
+    this.timeout(10000);
+    driver.manage().window().setSize(1024, 768).then(function() {
+      var element = driver.findElement(By.id('event-2'));
+      element.getCssValue('left').then(
+        function(value) {
+          expect(value).to.be.equal('0px');
           done();
         });
     });
