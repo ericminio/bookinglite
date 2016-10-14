@@ -23,9 +23,12 @@ Calendar.prototype.fillCalendar = function(page) {
     var element = elements[j];
     template.append(this.buildElementRow(element.element_id));
   }
-  template.append(this.buildLinkPrevious());
-  template.append(this.buildLinkNext());
-  page("#calendar").empty().append(template);
+  
+  page("#next").attr('href', this.buildLinkNext());
+  page("#previous").attr('href', this.buildLinkPrevious());
+  
+  page(".calendar").empty();
+  page("#calendar").prepend(template);
 };
 
 Calendar.prototype.buildMonthRow = function() {
@@ -143,26 +146,22 @@ Calendar.prototype.buildElementRow = function(element_id) {
   return template_row_element;
 };
 
+Calendar.prototype.buildCalendarNavigation = function(){
+  var nav = cheerio(mainTemplate.html('#next'));
+};
+
 Calendar.prototype.buildLinkNext = function(){
-  var link = cheerio(mainTemplate.html('#next'));
-  
   var nextMonth = new Date(this.date);
   nextMonth.setMonth(this.date.getMonth() + 2);
   
-  link.attr("href", "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth());
-  
-  return link;
+  return "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth();
 };
 
-Calendar.prototype.buildLinkPrevious = function(){
-  var link = cheerio(mainTemplate.html('#previous'));
-  
+Calendar.prototype.buildLinkPrevious = function(){ 
   var nextMonth = new Date(this.date);
   nextMonth.setMonth(this.date.getMonth());
   
-  link.attr("href", "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth());
-  
-  return link;
+  return "/calendar?y="+nextMonth.getFullYear()+"&m=" + nextMonth.getMonth();
 };
 
 module.exports = Calendar;

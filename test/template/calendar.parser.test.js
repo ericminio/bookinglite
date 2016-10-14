@@ -77,13 +77,13 @@ describe('Calendar template', function() {
   it('creates the expected "Next" link', function() {
     var calendar = new Calendar(date, this.database);
     var link = calendar.buildLinkNext();
-    expect(link.attr('href')).to.equal('/calendar?y=2016&m=10');
+    expect(link).to.equal('/calendar?y=2016&m=10');
   });
 
   it('creates the expected "Previous" link', function() {
     var calendar = new Calendar(date, this.database);
     var link = calendar.buildLinkPrevious();
-    expect(link.attr('href')).to.equal('/calendar?y=2016&m=8');
+    expect(link).to.equal('/calendar?y=2016&m=8');
   });
 
 });
