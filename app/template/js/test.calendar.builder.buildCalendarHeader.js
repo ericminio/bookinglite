@@ -35,11 +35,11 @@ describe('calendar.builder.buildCalendarHeader', function() {
     $ = cheerio.load(html);
   });
 
-  it('set the proper month and year header', function() {
-    buildCalendarHeader($, date);
-    expect($('.month-title').text()).to.be.equal('Septembre 2016');
-    expect($('.month-title').attr('colspan')).to.be.equal('30');
-  });
+//   it('set the proper month and year header', function() {
+//     buildCalendarHeader($, date);
+//     expect($('.month-title').text()).to.be.equal('Septembre 2016');
+//     expect($('.month-title').attr('colspan')).to.be.equal('30');
+//   });
 
   it('set the proper dayweek (i.e. JVSDL...) header', function() {
     buildCalendarHeader($, date);

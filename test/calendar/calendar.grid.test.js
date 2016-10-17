@@ -19,7 +19,7 @@ describe('Calendar grid', function() {
   before(function(done) {
     server.start();
     this.timeout(10000);
-    driver.get('http://localhost:5000/calendar?y=2016&m=9').then(done);
+    driver.get('http://localhost:5000/calendar-ajax?y=2016&m=9').then(done);
   });
 
   after(function(done) {

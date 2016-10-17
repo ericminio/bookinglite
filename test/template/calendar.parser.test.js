@@ -28,13 +28,13 @@ describe('Calendar template', function() {
     expect($('.calendar').html()).to.exist;
   });
 
-  it('display month cell', function() {
-    var calendar = new Calendar(date, this.database);
-    var row = calendar.buildMonthRow();
+//   it('display month cell', function() {
+//     var calendar = new Calendar(date, this.database);
+//     var row = calendar.buildMonthRow();
 
-    expect(row('td', 'tr').next().attr('colspan')).to.equal('30');
-    expect(row('td', 'tr').next().text()).to.equal('Septembre 2016');
-  });
+//     expect(row('td', 'tr').next().attr('colspan')).to.equal('30');
+//     expect(row('td', 'tr').next().text()).to.equal('Septembre 2016');
+//   });
 
   it('display day cell', function() {
     var calendar = new Calendar(date);

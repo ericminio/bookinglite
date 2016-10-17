@@ -14,7 +14,7 @@ Calendar.prototype.fillCalendar = function(page) {
 
   template = cheerio(template('.calendar').empty());
 
-  template.append(this.buildMonthRow().html());
+  //template.append(this.buildMonthRow().html());
   template.append(this.buildDayWeekRow().html());
   template.append(this.buildDayRow().html());
 
@@ -27,8 +27,10 @@ Calendar.prototype.fillCalendar = function(page) {
   page("#next").attr('href', this.buildLinkNext());
   page("#previous").attr('href', this.buildLinkPrevious());
   
-  page(".calendar").empty();
-  page("#calendar").prepend(template);
+  page("#calendar .panel-body").empty();
+    
+  page(".month-title").text(dateUtils.getMonth(this.date) + ' ' + this.date.getFullYear());
+  page("#calendar .panel-body").append(template);
 };
 
 Calendar.prototype.buildMonthRow = function() {

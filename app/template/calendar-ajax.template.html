@@ -14,35 +14,48 @@
 <script src="/template/js/event.display.js"></script>
 
 <script>
-	var date;
-	
+	var request_id = 0;
+
 	$(document).ready(function() {
-
-			parseCalendar();
-
+		parseCalendar();
 	});
-	
-	function parseCalendar(){
-				$.ajax(
-				{url: "/calendar-template", 
-				data: {"m": $('#m').val(),
-							 "y": $('#y').val()}, 
-				success: 
-					function(response){
-						jQuery('#calendar-container').html(response);
-					},
-				type: 'GET'
-				}
-			);
-	}
-	
-</script>	
 
-<input type=hidden id=m></input>	
+	function parseCalendar() {
+		request_id = request_id + 1;
+		$.ajax({
+			url: "/calendar-template",
+			data: {
+				"m": $('#m').val(),
+				"y": $('#y').val(),
+				"request_id": request_id
+			},
+// 			dataType: "json",
+			success: function(response) {
+				jQuery('#calendar-container').html(response);
+				reposition();
+			},
+			type: 'GET'
+		});
+
+	}
+</script>
+
+<input type=hidden id=m></input>
 <input type=hidden id=y></input>
-	
+
 <body>
-	<div id=calendar-container> </div>
+	<div id=calendar class="panel" style="min-width=600px;">
+		<div class="panel-header">
+			<span class=month-title></span>
+		</div>
+		<div class="panel-body" style="display: inline-block;width:100%;overflow-x: scroll;">
+			<div id=calendar-container> </div>
+		</div>
+		<div id=calendar-navigation class="panel-footer">
+			<a class="btn btn-default" id="previous">Précédant</a>
+			<a class="btn btn-default" id="next">Suivant</a>
+		</div>
+	</div>
 </body>
 
 </html>

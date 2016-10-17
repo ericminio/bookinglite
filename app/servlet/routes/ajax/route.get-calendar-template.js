@@ -11,7 +11,6 @@ calendar = function(request, response, database) {
 	var url_parts = url.parse(request.url, true);
 	var query = url_parts.query;
 
-	
 	var date;
 	if(query.y && query.m){
 		date = new Date(query.y, query.m - 1, 1, 0, 0, 0, 0);
@@ -28,7 +27,6 @@ calendar = function(request, response, database) {
 	
 	var elements = database.getAllElements();
 	for(j=0; j<elements.length; j++){
-		console.log(j);
 		var template = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());
 		var events = database.findEventsByElementYearMonth(elements[j].element_id, date.getFullYear(), date.getMonth());
 		calendarBuilder.buildElementRow(template, date, elements[j], events);	
@@ -36,7 +34,7 @@ calendar = function(request, response, database) {
 	}
 	
 	
-	response.write($.html('#calendar'));
+	response.write($.html('.calendar'));
 	response.end();
 
 };
