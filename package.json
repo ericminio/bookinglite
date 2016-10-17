@@ -27,7 +27,6 @@
   },
   "scripts": {
     "start": "node app/servlet/web.js",
-    "test": "./testsuite.sh",
-    "webtest": "./check.sh"
+    "test": "./testsuite.sh"
   }
 }

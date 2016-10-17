@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Experimentation</title>
+	<link rel="stylesheet" href="/template/css/calendar.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/template/js/event.display.js"></script>
+
+<script>
+	var date;
+	
+	$(document).ready(function() {
+
+			parseCalendar();
+
+	});
+	
+	function parseCalendar(){
+				$.ajax(
+				{url: "/calendar-template", 
+				data: {"m": $('#m').val(),
+							 "y": $('#y').val()}, 
+				success: 
+					function(response){
+						jQuery('#calendar-container').html(response);
+					},
+				type: 'GET'
+				}
+			);
+	}
+	
+</script>	
+
+<input type=hidden id=m></input>	
+<input type=hidden id=y></input>
+	
+<body>
+	<div id=calendar-container> </div>
+</body>
+
+</html>

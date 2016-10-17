@@ -28,4 +28,13 @@ describe('Calendar for any given month', function() {
     });
 
   });
+  
+  it('displays the calendar properly', function() {
+    this.timeout(10000);
+    return browser.visit('http://localhost:5000/calendar-ajax?y=2015&m=10').then(function(err) {
+      expect(browser.text('.month')).to.be.equal('Octobre 2015');
+
+    });
+
+  });
 });

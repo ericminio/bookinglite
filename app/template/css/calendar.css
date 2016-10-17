@@ -25,12 +25,12 @@ tr.day td {
 
 .calendar {
   white-space: nowrap;
-  table-layout: fixed;
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 600px;
-  border: none;
-  overflow: hidden;
+    /*table-layout: fixed;*/
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 600px;
+    border: none;
+    overflow: hidden;
 }
 
 .calendar tr td {
