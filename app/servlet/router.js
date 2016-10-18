@@ -2,16 +2,18 @@ var servecontent = require('./serve-content.js');
 
 module.exports = {
 
-	routes: [{
-		pattern: /\/calendar\??(&?\w*=\w*)*?(#\w*)?$/,
-		target: require('./routes/route.calendar')
-	}, {
-		pattern: /\/calendar-ajax\??(&?\w*=\w*)*?(#\w*)?$/,
-		target: require('./routes/route-ajax.calendar')
-	}, {
-		pattern: /\/calendar-template.*$/,
-		target: require('./routes/ajax/route.get-calendar-template')
-	}
+	routes: [
+		// 		{
+		// 		pattern: /\/calendar\??(&?\w*=\w*)*?(#\w*)?$/,
+		// 		target: require('./routes/route.calendar')
+		// 	}, 
+		{
+			pattern: /\/calendar\??(&?\w*=\w*)*?(#\w*)?$/,
+			target: require('./routes/route-ajax.calendar')
+		}, {
+			pattern: /\/calendar-template.*$/,
+			target: require('./routes/ajax/route.get-calendar-template')
+		}
 	],
 
 	endPointOf: function(request) {
@@ -21,7 +23,7 @@ module.exports = {
 			}
 		}
 		if (request.url == '/') {
-			return require('./routes/route.calendar');
+			return require('./routes/route-ajax.calendar');
 		}
 		return servecontent('app');
 	}
