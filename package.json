@@ -8,7 +8,8 @@
     "chai-webdriver-promised": "^4.0.3",
     "chromedriver": "^2.12.0",
     "jasmine-node": "^1.14.5",
-    "selenium-webdriver": "^2.53.3"
+    "selenium-webdriver": "^2.53.3",
+    "encode-html": "1.0.1"
   },
   "devDependencies": {
     "chai": "3.5.0",

@@ -21,7 +21,7 @@ describe('Navigation', function() {
 
   beforeEach(function(){
     this.timeout(10000);
-    return browser.visit('http://localhost:5000/calendar?y=2015&m=10');
+    return browser.visit('http://localhost:5000/calendar-ajax?y=2015&m=10');
   });
   
   it('using the next link display the next month', function() {

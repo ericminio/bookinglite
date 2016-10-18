@@ -19,22 +19,13 @@ describe('Calendar for any given month', function() {
   after(function() {
     this.server.stop();
   });
-
+  
   it('displays the calendar properly', function() {
     this.timeout(10000);
-    return browser.visit('http://localhost:5000/calendar?y=2015&m=10').then(function(err) {
+    return browser.visit('http://localhost:5000/calendar-ajax?y=2015&m=10').then(function(err) {
       expect(browser.text('.month-title')).to.be.equal('Octobre 2015');
 
     });
 
   });
-  
-//   it('displays the calendar properly', function() {
-//     this.timeout(10000);
-//     return browser.visit('http://localhost:5000/calendar-ajax?y=2015&m=10').then(function(err) {
-//       expect(browser.text('.month-title')).to.be.equal('Octobre 2015');
-
-//     });
-
-//   });
 });

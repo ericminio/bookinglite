@@ -20,6 +20,12 @@ calendar = function(request, response, database) {
 	$('#m').val(tempDate.getMonth()+1);
 	$('#y').val(tempDate.getFullYear());
 
+	
+	var script = $('script').text();
+	script = script.replace('var date;', 'var date = new Date('+tempDate.getFullYear() + ',' + tempDate.getMonth()+',1, 0, 0, 0, 0);');
+	$('script').text(script);
+	
+	
 	response.write($.html());
 	response.end();
 
