@@ -25,20 +25,17 @@
 		updateTitle();
 		parseCalendar();
 		
-		$('#next').click(function(){
-			var newMonth = date.getMonth()+1;
+		$('.cal-nav').click(function(){
+			var newMonth = date.getMonth()+parseInt(this.getAttribute("cal-month"));
 			date.setMonth(newMonth);
 			updateTitle();
 			parseCalendar();
 		});
 		
-		$('#previous').click(function(){
-			var newMonth = date.getMonth()-1;
-			date.setMonth(newMonth);
-			updateTitle();
-			parseCalendar();
-		});
-		
+	});
+	
+	$(window).resize(function() {
+		reposition();
 	});
 	
 	function updateTitle(){
@@ -78,8 +75,8 @@
 			<div id=calendar-container> </div>
 		</div>
 		<div id=calendar-navigation class="panel-footer">
-			<a class="btn btn-default" id="previous">Précédant</a>
-			<a class="btn btn-default" id="next">Suivant</a>
+			<a class="btn btn-default cal-nav" cal-month="-1" id="previous">Précédant</a>
+			<a class="btn btn-default cal-nav" cal-month="1" id="next">Suivant</a>
 		</div>
 	</div>
 </body>

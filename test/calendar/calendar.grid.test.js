@@ -5,13 +5,8 @@ var chaiWebdriver = require('chai-webdriver-promised');
 var expect = chai.expect;
 
 describe('Calendar grid', function() {
-  var Server = require('../../app/servlet/server');
-  var router = require('../../app/servlet/router');
-  var Database = require('../../app/data/memory.database');
-  var data = require('../../test/database/test.data');
-
-  var server = new Server(router);
-  server.useDatabase(new Database(data));
+  var Server = require('../../test/servlet/servlet.for.test');
+  var server = new Server();
 
   var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.firefox()).build();
   chai.use(chaiWebdriver(driver, 15000, 200));

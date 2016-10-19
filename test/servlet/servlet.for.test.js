@@ -11,7 +11,6 @@ function ServletForTest() {}
 method.start = function() {
   this.server = new Server(router);
   this.server.useDatabase(new Database(data));
-
   this.server.start();
 }
 
