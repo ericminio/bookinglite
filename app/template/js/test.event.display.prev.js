@@ -5,7 +5,7 @@ var expect = chai.expect;
 var Server = require('../../../test/servlet/servlet.for.test');
 var server = new Server();
 
-describe.only('Event display prev', function() {
+describe('Event display prev', function() {
   var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.firefox()).build();
 
   before(function(done) {
