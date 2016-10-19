@@ -17,9 +17,7 @@ var calculateEventLength = function(start_date, month, days) {
 }
 
 var buildCalendarHeader = function($, date) {
-//   $('.month-title').text(dateUtils.getMonth(date) + ' ' + date.getFullYear());
   var daysInMonth = dateUtils.daysInMonth(date);
-//   $('.month-title').attr('colspan', daysInMonth);
 
   var firstCellOfDayWeek = $('.dayweek td:first-child');
   var firstCellOfDay = $('.day td:first-child');
@@ -74,6 +72,9 @@ var buildElementRow = function($, date, element, events) {
     var currentEvent = eventTemplate.clone();
     
     var eventLength = calculateEventLength(events[k].start_date, date.getMonth(), events[k].duration_days);
+    if(eventLength!=events[k].duration_days){
+      currentEvent.addClass('prev');
+    }
     currentEvent.attr('days', eventLength);
     currentEvent.attr("id", "event-" + events[k].event_id);
     currentEvent.find('span').text(events[k].first_name + ' ' + events[k].last_name);
