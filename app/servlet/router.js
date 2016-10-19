@@ -13,6 +13,9 @@ module.exports = {
 		}, {
 			pattern: /\/calendar-template.*$/,
 			target: require('./routes/ajax/route.get-calendar-template')
+		}, {
+			pattern: /\/calendar\/edit$/,
+			target: require('./routes/route-edit.calendar')
 		}
 	],
 

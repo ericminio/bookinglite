@@ -25,7 +25,7 @@ tr.day td {
 
 .calendar {
   white-space: nowrap;
-    /*table-layout: fixed;*/
+    table-layout: fixed;
     box-sizing: border-box;
     width: 100%;
     min-width: 600px;
@@ -48,7 +48,7 @@ tr.day td {
 }
 
 .element-title {
-  width: 150px;
+  width: 150px !important;
   max-width: 150px;
   padding-left: 7px;
 }

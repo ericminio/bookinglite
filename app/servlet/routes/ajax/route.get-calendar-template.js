@@ -2,7 +2,7 @@ var fs = require('fs');
 var cheerio = require('cheerio');
 var url = require('url');
 var dateUtils = require('../../../lib/date.utils');
-var calendarBuilder = require('../../../template/js/calendar.builder');
+var calendarBuilder = require('../../../template/calendar/calendar.builder');
 
 calendar = function(request, response, database) {
 	var $ = cheerio.load(fs.readFileSync('./app/template/calendar.template.html').toString());

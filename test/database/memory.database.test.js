@@ -2,7 +2,7 @@ var Database = require('../../app/data/memory.database');
 var data = require('./test.data');
 var expect = require('chai').expect;
 var assert = require('assert');
-xdescribe('Memory database', function() {
+describe('Memory database', function() {
 
   before(function() {
     this.database = new Database(data);
