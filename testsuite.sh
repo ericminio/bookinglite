@@ -9,4 +9,4 @@ fi
 export DISPLAY=:1.5
 
 node node_modules/.bin/mocha app --recursive
-#node node_modules/.bin/mocha test --recursive
+node node_modules/.bin/mocha test --recursive
