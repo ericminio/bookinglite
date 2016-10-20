@@ -27,7 +27,7 @@
     "npm": "3.10.3"
   },
   "scripts": {
-    "start": "node app/servlet/web.js",
+    "start": "node servlet/web.js",
     "test": "./testsuite.sh"
   }
 }

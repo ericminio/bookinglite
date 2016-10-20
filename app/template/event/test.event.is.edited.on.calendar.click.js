@@ -24,6 +24,7 @@ describe('Event edit', function() {
     this.timeout(10000);
     return browser.click('#event-2').then(function(){
       browser.assert.text('title', 'Évènement');
+      expect(browser.field('#firstname').value).to.be.equal('Jessika');
     });
   });
 });
