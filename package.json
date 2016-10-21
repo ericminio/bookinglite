@@ -1,7 +1,7 @@
 {
-  "name": "calendar",
+  "name": "BookingLite",
   "version": "0.0.1",
-  "main": "app/servlet/web.js",
+  "main": "servlet/web.js",
   "dependencies": {
     "chai-as-promised": "^6.0.0",
     "chai-webdriver": "^1.2.0",

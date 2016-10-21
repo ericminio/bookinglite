@@ -59,6 +59,16 @@ Database.prototype.findElementByID = function(element_id) {
   return toReturn;
 }
 
+Database.prototype.findEventByID = function(event_id) {
+  var toReturn;
+  events.forEach(function(value, key, map) {
+    if (value.event_id == event_id) {
+      toReturn = value;
+    }
+  });
+  return toReturn;
+}
+
 Database.prototype.getAllElements = function() {
   var iterator = elements.values();
   var list = [];
