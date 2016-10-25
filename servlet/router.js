@@ -2,16 +2,21 @@ var servecontent = require('./serve-content.js');
 
 module.exports = {
 
-	routes: [
-		{
+	routes: [{
 			pattern: /\/calendar\??(&?\w*=\w*)*?(#\w*)?$/,
 			target: require('./routes/route-ajax.calendar')
 		}, {
+			pattern: /\/calendar\/event\/edit\??(&?\w*=\w*)*?(#\w*)?$/,
+			target: require('./routes/route-edit.event')
+		}
+
+		// Ajax calls:
+		, {
 			pattern: /\/calendar-template.*$/,
 			target: require('./routes/ajax/route.get-calendar-template')
 		}, {
-			pattern: /\/calendar\/event\/edit\??(&?\w*=\w*)*?(#\w*)?$/,
-			target: require('./routes/route-edit.event')
+			pattern: /\/calendar\/event\/save\??(&?\w*=\w*)*?(#\w*)?$/,
+			target: require('./routes/ajax/route-save.event')
 		}
 	],
 

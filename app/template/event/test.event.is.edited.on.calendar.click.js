@@ -18,7 +18,7 @@ describe('Event edit', function() {
     this.timeout(10000);
     return browser.visit('http://localhost:5000/calendar?y=2016&m=9');
   });
-  
+
   it('is forwarded to the event when user click the event and the expected information is displayed.', function() {
     this.timeout(10000);
     return browser.click('#event-2').then(function() {
@@ -29,7 +29,18 @@ describe('Event edit', function() {
       expect(browser.field('#startdate').value).to.be.equal('2016-09-25');
       expect(browser.field('#enddate').value).to.be.equal('2016-09-28');
       expect(browser.field('#element').value).to.be.equal('1');
-      
+    });
+  });
+ 
+  it.only('save data when submitting the form', function() {
+    this.timeout(10000);
+    return browser.click('#event-2').then(function() {
+      return browser.fill("#firstname", "Jess Ika")
+        .fill("#lastname", "Pepinetos")
+        .pressButton("Enregistrer").then(function() {
+          var event = server.database.findEventByID(2);
+          //expect(event.first_name).to.be.equal("Jess Ika");
+        });
     });
   });
 

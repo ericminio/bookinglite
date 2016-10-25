@@ -64,9 +64,18 @@ Database.prototype.findEventByID = function(event_id) {
   events.forEach(function(value, key, map) {
     if (value.event_id == event_id) {
       toReturn = value;
-    }
+    } 
   });
   return toReturn;
+}
+
+Database.prototype.saveEvent = function(event) {
+  events.forEach(function(value, key, map) {
+    if (value.event_id == event.event_id) {
+      value.first_name = event.first_name;
+      return value;
+    }
+  });
 }
 
 Database.prototype.getAllElements = function() {

@@ -67,4 +67,16 @@ describe('Memory database', function() {
     assert.equal(elements[2].event_id, 4);
   });
 
+  it.only('can save event', function() {
+    var event = this.database.findEventByID(2);
+    assert.equal(event.first_name, "Jessika");
+    
+    this.database.saveEvent({"event_id":2,"first_name":"Jess Ika"});
+    var modifiedEvent = this.database.findEventByID(2);
+    assert.equal(modifiedEvent.first_name, "Jess Ika");
+    
+    
+
+  });
+
 });
