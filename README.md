@@ -1,6 +1,11 @@
 # bookinglite
 <img src="https://travis-ci.org/mathieu166/bookinglite.svg?branch=master"/>
 
+Prerequisite for linux (headless)
+- xvfb
+- firefox
+On Centos: sudo yum install xvfb firefox
+
 Todo:
 On the calendar ajax version: 
 - for UI optimization, when loading the calendar, send a first ajax request for the display of the month title header and then one for the content.

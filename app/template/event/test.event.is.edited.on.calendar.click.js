@@ -31,19 +31,6 @@ describe('Event edit', function() {
       expect(browser.field('#element').value).to.be.equal('1');
     });
   });
- 
-  it.only('save data when submitting the form', function() {
-    this.timeout(10000);
-    return browser.click('#event-2').then(function() {
-      return browser.fill("#firstname", "Jess Ika")
-        .fill("#lastname", "Pepinetos")
-        .pressButton("Enregistrer").then(function() {
-          var event = server.database.findEventByID(2);
-          //expect(event.first_name).to.be.equal("Jess Ika");
-        });
-    });
-  });
-
 });
 
 describe('Event url', function() {

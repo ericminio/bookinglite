@@ -16,6 +16,12 @@ edit_event = function(request, response, database) {
 		response.end();
 		return;
 	}
+	
+	
+	$('#y').val(query.y);
+	$('#m').val(query.m);
+	
+	$('#event_id').val(event.event_id);
 	$('#firstname').val(event.first_name);
 	$('#lastname').val(event.last_name);
 	$('#startdate').val(dateUtils.formatForHTMLSelect(event.start_date));
@@ -32,7 +38,6 @@ edit_event = function(request, response, database) {
 	$('#element').val(event.element_id);
 	response.write($.html());
 	response.end();
-
 };
 
 module.exports = edit_event;

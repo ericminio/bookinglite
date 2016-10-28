@@ -12,6 +12,7 @@
 <script>
 	$(document).ready(function() {
 		$('#save').click(function() {
+			$(this).attr('disabled','disabled'); 
 			$.ajax({
 				url: "/calendar/event/save",
 				data: {
@@ -21,25 +22,21 @@
 				},
 				dataType: "json",
 				success: function(response) {
-				
+					$('#save').removeAttr('disabled');
+					window.location.replace('/calendar?y=' + $('#y').val() + '&m=' + $('#m').val());
 				},
 				type: 'GET'
 			});
 		});
 	});
 
-// 	function formData() {
-// 		return {
-// 			"event_id": $('#event_id').val(),
-// 			"firstname": $('#firstname').val(),
-// 			"lastname": $('#lastname').val(),
-// 		};
-// 	}
 </script>
 
 <body>
 	<form>
 		<input type=hidden id=event_id>
+		<input type=hidden id=y>
+		<input type=hidden id=m>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">

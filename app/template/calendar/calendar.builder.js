@@ -76,7 +76,7 @@ var buildElementRow = function($, date, element, events) {
       currentEvent.addClass('prev');
     }
     currentEvent.attr('days', eventLength);
-    currentEvent.attr('onclick', "window.location='/calendar/event/edit?e="+events[k].event_id+"'");
+    currentEvent.attr('onclick', "window.location='/calendar/event/edit?e="+events[k].event_id+"&y="+date.getFullYear()+"&m="+(date.getMonth()+1)+"'");
     currentEvent.attr("id", "event-" + events[k].event_id);
     currentEvent.find('span').text(events[k].first_name + ' ' + events[k].last_name);
     var cellIndex = calculateCellIndex(events[k].start_date, date.getMonth(), events[k].duration_days);
